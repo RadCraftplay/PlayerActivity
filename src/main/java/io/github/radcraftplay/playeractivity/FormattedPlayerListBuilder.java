@@ -3,10 +3,10 @@ package io.github.radcraftplay.playeractivity;
 import java.util.*;
 
 public class FormattedPlayerListBuilder implements PlayerListBuilder {
-  private PlayerListFormatter listFormatter;
+  private PlayerListGenerator listGenerator;
 
   public FormattedPlayerListBuilder() {
-    listFormatter = new PrettyPlayerListFormatter();
+    listGenerator = new PrettyPlayerListGenerator();
   }
 
   @Override
@@ -15,11 +15,11 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
     Map<String, PlayerConnectionInfo> playerList = sortByConnection(data);
     Set<Map.Entry<String, PlayerConnectionInfo>> playerSet = playerList.entrySet();
 
-    listBuilder.append(listFormatter.getListHeader(data));
+    listBuilder.append(listGenerator.getListHeader(data));
 
     for (Map.Entry<String, PlayerConnectionInfo> entry : playerSet) {
       listBuilder.append("\n ");
-      listBuilder.append(listFormatter.generateRow(entry));
+      listBuilder.append(listGenerator.generateRow(entry));
     }
 
     return listBuilder.toString();

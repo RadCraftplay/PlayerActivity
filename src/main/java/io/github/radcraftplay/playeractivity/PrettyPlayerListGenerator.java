@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrettyPlayerListFormatter implements PlayerListFormatter {
+public class PrettyPlayerListGenerator implements PlayerListGenerator {
   @Override
   public String getListHeader(HashMap<String, PlayerConnectionInfo> data) {
     return "Recent player activity:";
