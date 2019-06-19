@@ -1,19 +1,22 @@
 package io.github.radcraftplay.playeractivity;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class FormattedPlayerListBuilder implements PlayerListBuilder {
-  private PlayerListGenerator listGenerator;
+  private final PlayerListGenerator listGenerator;
+  private final PlayerListSorter listSorter;
 
   public FormattedPlayerListBuilder() {
     listGenerator = new PrettyPlayerListGenerator();
+    listSorter = new ConnectionInfoPlayerListSorter();
   }
 
   @Override
   public String buildPlayerList(HashMap<String, PlayerConnectionInfo> data) {
     StringBuilder listBuilder = new StringBuilder();
-    Map<String, PlayerConnectionInfo> playerList = sortByConnection(data);
-    Set<Map.Entry<String, PlayerConnectionInfo>> playerSet = playerList.entrySet();
+    Set<Map.Entry<String, PlayerConnectionInfo>> playerSet = listSorter.sortPlayerList(data);
 
     listBuilder.append(listGenerator.getListHeader(data));
 
@@ -23,25 +26,5 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
     }
 
     return listBuilder.toString();
-  }
-
-  private HashMap<String, PlayerConnectionInfo> sortByConnection(HashMap<String, PlayerConnectionInfo> map) {
-    List<Map.Entry<String, PlayerConnectionInfo>> list = new LinkedList<>(map.entrySet());
-
-    list.sort((entry1, entry2) -> {
-      PlayerConnectionInfo info1 = entry1.getValue();
-      PlayerConnectionInfo info2 = entry2.getValue();
-      return info1.getTimePassedFromLastConnection().compareTo(
-              info2.getTimePassedFromLastConnection());
-    });
-
-    HashMap<String, PlayerConnectionInfo> sortedHashMap = new LinkedHashMap<>();
-
-    for (Object o : list) {
-      Map.Entry entry = (Map.Entry) o;
-      sortedHashMap.put((String) entry.getKey(), (PlayerConnectionInfo) entry.getValue());
-    }
-
-    return sortedHashMap;
   }
 }
