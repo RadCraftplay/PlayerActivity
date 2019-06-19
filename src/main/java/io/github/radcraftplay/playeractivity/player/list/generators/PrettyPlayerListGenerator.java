@@ -1,5 +1,6 @@
-package io.github.radcraftplay.playeractivity;
+package io.github.radcraftplay.playeractivity.player.list.generators;
 
+import io.github.radcraftplay.playeractivity.PlayerConnectionInfo;
 import org.bukkit.ChatColor;
 
 import java.time.Duration;
