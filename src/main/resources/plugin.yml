@@ -1,0 +1,9 @@
+name: PlayerActivity
+version: 1.0-SNAPSHOT
+
+main: io.github.radcraftplay.playeractivity.PlayerActivity
+
+commands:
+  players:
+    description: Displays list of players along with time passed since they disconnected
+    usage: /players
