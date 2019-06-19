@@ -9,11 +9,11 @@ import java.util.HashMap;
 public class PlayersCommandExecutor implements CommandExecutor {
 
   private HashMap<String, PlayerConnectionInfo> connections;
-  private final PlayerListGenerator playerListGenerator;
+  private final PlayerListBuilder playerListBuilder;
 
   public PlayersCommandExecutor(HashMap<String, PlayerConnectionInfo> connections) {
     this.connections = connections;
-    this.playerListGenerator = new FormattedPlayerListGenerator();
+    this.playerListBuilder = new FormattedPlayerListBuilder();
   }
 
   @Override
@@ -33,6 +33,6 @@ public class PlayersCommandExecutor implements CommandExecutor {
   }
 
   private String getPlayerList() {
-    return playerListGenerator.generatePlayerList(connections);
+    return playerListBuilder.buildPlayerList(connections);
   }
 }

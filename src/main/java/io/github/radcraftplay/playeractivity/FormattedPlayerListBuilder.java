@@ -2,15 +2,15 @@ package io.github.radcraftplay.playeractivity;
 
 import java.util.*;
 
-public class FormattedPlayerListGenerator implements PlayerListGenerator {
+public class FormattedPlayerListBuilder implements PlayerListBuilder {
   private PlayerListFormatter listFormatter;
 
-  public FormattedPlayerListGenerator() {
+  public FormattedPlayerListBuilder() {
     listFormatter = new PrettyPlayerListFormatter();
   }
 
   @Override
-  public String generatePlayerList(HashMap<String, PlayerConnectionInfo> data) {
+  public String buildPlayerList(HashMap<String, PlayerConnectionInfo> data) {
     StringBuilder listBuilder = new StringBuilder();
     Map<String, PlayerConnectionInfo> playerList = sortByConnection(data);
     Set<Map.Entry<String, PlayerConnectionInfo>> playerSet = playerList.entrySet();
