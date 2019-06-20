@@ -1,6 +1,7 @@
 package io.github.radcraftplay.playeractivity.commands.executors;
 
 import io.github.radcraftplay.playeractivity.PlayerConnectionInfo;
+import io.github.radcraftplay.playeractivity.player.list.PlayerListSettings;
 import io.github.radcraftplay.playeractivity.player.list.builders.FormattedPlayerListBuilder;
 import io.github.radcraftplay.playeractivity.player.list.builders.PlayerListBuilder;
 import org.bukkit.command.Command;
@@ -14,9 +15,11 @@ public class PlayersCommandExecutor implements CommandExecutor {
   private HashMap<String, PlayerConnectionInfo> connections;
   private final PlayerListBuilder playerListBuilder;
 
-  public PlayersCommandExecutor(HashMap<String, PlayerConnectionInfo> connections) {
+  public PlayersCommandExecutor(
+          HashMap<String, PlayerConnectionInfo> connections,
+          PlayerListSettings listSettings) {
     this.connections = connections;
-    this.playerListBuilder = new FormattedPlayerListBuilder();
+    this.playerListBuilder = new FormattedPlayerListBuilder(listSettings);
   }
 
   @Override

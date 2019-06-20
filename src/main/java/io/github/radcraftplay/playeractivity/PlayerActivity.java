@@ -15,7 +15,7 @@ public class PlayerActivity extends JavaPlugin {
     PlayerListSettings listSettings = getListSettings();
 
     getServer().getPluginManager().registerEvents(new PlayerActivityListener(storage.connections), this);
-    getServer().getPluginCommand("players").setExecutor(new PlayersCommandExecutor(storage.connections));
+    getServer().getPluginCommand("players").setExecutor(new PlayersCommandExecutor(storage.connections, listSettings));
   }
 
   private PlayerListSettings getListSettings() {
