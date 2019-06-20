@@ -1,5 +1,6 @@
-package io.github.radcraftplay.playeractivity;
+package io.github.radcraftplay.playeractivity.commands.executors;
 
+import io.github.radcraftplay.playeractivity.PlayerConnectionInfo;
 import io.github.radcraftplay.playeractivity.player.list.builders.FormattedPlayerListBuilder;
 import io.github.radcraftplay.playeractivity.player.list.builders.PlayerListBuilder;
 import org.bukkit.command.Command;
