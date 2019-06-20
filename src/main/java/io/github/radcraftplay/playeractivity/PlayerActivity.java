@@ -24,14 +24,16 @@ public class PlayerActivity extends JavaPlugin {
 
     settings.setListLength((int)config.get("list.length"));
     settings.setDisplayOnlinePlayers((boolean)config.get("list.displayOnlinePlayers"));
+    settings.setLimitListLength((boolean)config.get("list.limitListLength"));
 
     return settings;
   }
 
   private void loadConfig() {
     FileConfiguration config = this.getConfig();
-    config.addDefault("list.length", 9);
     config.addDefault("list.displayOnlinePlayers", true);
+    config.addDefault("list.limitListLength", true);
+    config.addDefault("list.length", 9);
 
     config.options().copyDefaults(true);
     this.saveConfig();

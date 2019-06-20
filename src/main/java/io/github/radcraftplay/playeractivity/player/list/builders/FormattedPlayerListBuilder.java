@@ -25,10 +25,13 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
 
   private List<PlayerFilter> getPlayerFilters(PlayerListSettings settings) {
     List<PlayerFilter> filters = new ArrayList<>();
-    if (!settings.getDisplayOnlinePlayers())
+    if (!settings.getDisplayOnlinePlayers()) {
       filters.add(new OnlinePlayerFilter(false));
+    }
 
-    filters.add(new CountFilter(listSettings.getListLength()));
+    if (settings.getLimitListLength()) {
+      filters.add(new CountFilter(listSettings.getListLength()));
+    }
 
     return filters;
   }
