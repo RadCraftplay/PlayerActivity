@@ -28,7 +28,7 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
 
     for (Map.Entry<String, PlayerConnectionInfo> entry : playerSet) {
       listBuilder.append("\n ");
-      listBuilder.append(listGenerator.generateRow(entry));
+      listBuilder.append(listGenerator.generateRow(entry.getKey(), entry.getValue()));
     }
 
     return listBuilder.toString();

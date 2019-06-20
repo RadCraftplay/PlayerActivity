@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.Map;
 
 public class PrettyPlayerListGenerator implements PlayerListGenerator {
   @Override
@@ -14,13 +13,11 @@ public class PrettyPlayerListGenerator implements PlayerListGenerator {
   }
 
   @Override
-  public String generateRow(Map.Entry<String, PlayerConnectionInfo> entry) {
-    String playerName = entry.getKey();
-    PlayerConnectionInfo connectionInfo = entry.getValue();
-
-    return playerName
-            + " - "
-            + getLastOnlineString(connectionInfo);
+  public String generateRow(String playerName, PlayerConnectionInfo connectionInfo) {
+      return '\n'
+              + playerName
+              + " - "
+              + getLastOnlineString(connectionInfo);
   }
 
   private String getLastOnlineString(PlayerConnectionInfo connectionInfo) {
