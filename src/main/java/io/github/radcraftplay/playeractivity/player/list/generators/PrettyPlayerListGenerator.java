@@ -14,8 +14,7 @@ public class PrettyPlayerListGenerator implements PlayerListGenerator {
 
   @Override
   public String generateRow(String playerName, PlayerConnectionInfo connectionInfo) {
-      return '\n'
-              + playerName
+      return playerName
               + " - "
               + getLastOnlineString(connectionInfo);
   }
