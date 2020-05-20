@@ -31,6 +31,9 @@ public class PlayersCommandExecutor implements CommandExecutor {
     if (args.length > 0) {
       return false;
     }
+    if (!command.testPermission(sender)) {
+      return true;
+    }
 
     String playerList = getPlayerList();
     sender.sendMessage(playerList);
