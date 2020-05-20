@@ -7,3 +7,12 @@ commands:
   players:
     description: Displays list of players along with time passed since they disconnected
     usage: /players
+
+permissions:
+  playeractivity.*:
+    description: Gives access to all PlayerActivity commands
+    children:
+      playeractivity.players: true
+  playeractivity.players:
+    description: Displays list of recently active players
+    default: true
