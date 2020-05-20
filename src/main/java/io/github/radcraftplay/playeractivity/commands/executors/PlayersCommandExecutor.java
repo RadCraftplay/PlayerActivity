@@ -32,7 +32,7 @@ public class PlayersCommandExecutor implements CommandExecutor {
     if (args.length > 0) {
       return false;
     }
-    if (!sender.hasPermission("playeractivity.players")) {
+    if (!sender.hasPermission("playeractivity.players") && !sender.isOp()) {
       sender.sendMessage(ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. " +
               "Please contact the server administrators if you believe that this is a mistake." + ChatColor.WHITE);
       return true;
