@@ -15,4 +15,3 @@ permissions:
       playeractivity.players: true
   playeractivity.players:
     description: Displays list of recently active players
-    default: true
