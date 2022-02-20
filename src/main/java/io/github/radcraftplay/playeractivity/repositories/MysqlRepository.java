@@ -53,11 +53,11 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
             if (!set.next())
                 return null;
 
-            String name = set.getString(0);
-            boolean connected = set.getBoolean(1);
-            Date date = set.getDate(2);
+            String name = set.getString(1);
+            boolean connected = set.getBoolean(2);
+            Timestamp timestamp = set.getTimestamp(3);
 
-            return new PlayerConnectionInfo(name, connected, date
+            return new PlayerConnectionInfo(name, connected, timestamp
                     .toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDateTime());
