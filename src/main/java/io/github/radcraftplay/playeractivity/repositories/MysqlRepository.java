@@ -30,11 +30,11 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
             ResultSet set = statement.executeQuery(MysqlQueries.getAllPlayersQuery());
 
             while (set.next()) {
-                String name = set.getString(0);
-                boolean connected = set.getBoolean(1);
-                Date date = set.getDate(2);
+                String name = set.getString(1);
+                boolean connected = set.getBoolean(2);
+                Timestamp timestamp = set.getTimestamp(3);
 
-                infos.add(new PlayerConnectionInfo(name, connected, date
+                infos.add(new PlayerConnectionInfo(name, connected, timestamp
                         .toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime()));
