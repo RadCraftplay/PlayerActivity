@@ -4,10 +4,8 @@ import java.util.Collection;
 import java.util.function.Predicate;
 
 public interface Repository<ID, ENTITY> {
-    Collection<ENTITY> GetAll();
-    ENTITY query(ID id);
-    Collection<ENTITY> query(Predicate<ENTITY> condition);
-
+    Collection<ENTITY> getAll();
+    ENTITY get(ID id);
     ID add(ENTITY entity);
     ENTITY update(ID id, ENTITY entity);
     boolean delete(ID id);
