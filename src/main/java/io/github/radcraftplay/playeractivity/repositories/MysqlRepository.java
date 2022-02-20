@@ -142,9 +142,9 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
 
         public static String getUpdatePlayerConnectionInfoUpdate(String id, PlayerConnectionInfo info) {
             return String.format("UPDATE player_connection_info\n" +
-                    "SET username = %s,\n" +
+                    "SET username = \"%s\",\n" +
                     "connected = %b,\n" +
-                    "lastDisconnected = %s\n" +
+                    "lastDisconnected = \"%s\"\n" +
                     "WHERE username = \"%s\";",
                     info.getName(),
                     info.isConnected(),
