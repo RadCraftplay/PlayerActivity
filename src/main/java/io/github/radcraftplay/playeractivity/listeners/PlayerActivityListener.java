@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class PlayerActivityListener implements Listener {
@@ -21,9 +22,9 @@ public class PlayerActivityListener implements Listener {
     String playerName = event.getPlayer().getDisplayName();
 
     if (connections.containsKey(playerName)) {
-      connections.get(playerName).setConnected();
+      connections.get(playerName).setConnected(true);
     } else {
-      connections.put(playerName, new PlayerConnectionInfo());
+      connections.put(playerName, new PlayerConnectionInfo(playerName, true));
     }
   }
 
@@ -32,11 +33,9 @@ public class PlayerActivityListener implements Listener {
     String playerName = event.getPlayer().getDisplayName();
 
     if (connections.containsKey(playerName)) {
-      connections.get(playerName).setDisconnected();
+      connections.get(playerName).setConnected(false);
     } else {
-      PlayerConnectionInfo info = new PlayerConnectionInfo();
-      info.setDisconnected();
-
+      PlayerConnectionInfo info = new PlayerConnectionInfo(playerName, false, LocalDateTime.now());
       connections.put(playerName, info);
     }
   }
@@ -46,11 +45,9 @@ public class PlayerActivityListener implements Listener {
     String playerName = event.getPlayer().getDisplayName();
 
     if (connections.containsKey(playerName)) {
-      connections.get(playerName).setDisconnected();
+      connections.get(playerName).setConnected(false);
     } else {
-      PlayerConnectionInfo info = new PlayerConnectionInfo();
-      info.setDisconnected();
-
+      PlayerConnectionInfo info = new PlayerConnectionInfo(playerName, false, LocalDateTime.now());
       connections.put(playerName, info);
     }
   }
