@@ -130,7 +130,7 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
         }
 
         public static String getAddPlayerConnectionInfoUpdate(PlayerConnectionInfo info) {
-            return String.format("INSERT INTO player_connection_info VALUE (\"%s\", %b, %s);",
+            return String.format("INSERT INTO player_connection_info VALUE (\"%s\", %b, \"%s\");",
                     info.getName(),
                     info.isConnected(),
                     Timestamp.valueOf(info.getLastDisconnected()));
