@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/jar</output-path>
     <root id="archive" name="PlayerActivity.jar">
       <element id="module-output" name="PlayerActivity" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.45" />
     </root>
   </artifact>
 </component>
