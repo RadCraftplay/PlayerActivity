@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class PlayerConnectionInfo {
-    private String name = "";
+    private String name;
 
     public boolean isConnected() {
         return connected;
@@ -14,7 +14,7 @@ public class PlayerConnectionInfo {
         this.connected = connected;
     }
 
-    private boolean connected = true;
+    private boolean connected;
 
     public LocalDateTime getLastDisconnected() {
         return lastDisconnected;
@@ -24,11 +24,12 @@ public class PlayerConnectionInfo {
         this.lastDisconnected = lastDisconnected;
     }
 
-    private LocalDateTime lastDisconnected = null;
+    private LocalDateTime lastDisconnected;
 
     public PlayerConnectionInfo(String name, boolean connected) {
         this.name = name;
         this.connected = connected;
+        this.lastDisconnected = LocalDateTime.now();
     }
 
     public PlayerConnectionInfo(String name, boolean connected, LocalDateTime lastDisconnected) {
