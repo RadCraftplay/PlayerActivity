@@ -37,21 +37,20 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
   }
 
   @Override
-  public String buildPlayerList(HashMap<String, PlayerConnectionInfo> data) {
+  public String buildPlayerList(Collection<PlayerConnectionInfo> data) {
     StringBuilder listBuilder = new StringBuilder();
-    Set<Map.Entry<String, PlayerConnectionInfo>> playerSet = listSorter.sortPlayerList(data);
+    Collection<PlayerConnectionInfo> playerSet = listSorter.sortPlayerList(data);
 
     resetFilters();
 
     listBuilder.append(listGenerator.getListHeader(data));
 
-    for (Map.Entry<String, PlayerConnectionInfo> entry : playerSet) {
-      String playerName = entry.getKey();
-      PlayerConnectionInfo connectionInfo = entry.getValue();
+    for (PlayerConnectionInfo info : playerSet) {
+      String playerName = info.getName();
       MismatchAction action = null;
 
       for (PlayerFilter filter : playerFilters) {
-        if (!filter.suitsCriteria(playerName, connectionInfo)) {
+        if (!filter.suitsCriteria(playerName, info)) {
           action = filter.getMismatchAction();
         }
       }
@@ -67,7 +66,7 @@ public class FormattedPlayerListBuilder implements PlayerListBuilder {
       }
 
       listBuilder.append("\n ");
-      listBuilder.append(listGenerator.generateRow(playerName, connectionInfo));
+      listBuilder.append(listGenerator.generateRow(playerName, info));
     }
 
     return listBuilder.toString();

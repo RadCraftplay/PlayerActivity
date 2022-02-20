@@ -4,22 +4,21 @@ import io.github.radcraftplay.playeractivity.PlayerConnectionInfo;
 import io.github.radcraftplay.playeractivity.player.list.PlayerListSettings;
 import io.github.radcraftplay.playeractivity.player.list.builders.FormattedPlayerListBuilder;
 import io.github.radcraftplay.playeractivity.player.list.builders.PlayerListBuilder;
+import io.github.radcraftplay.playeractivity.repositories.Repository;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.HashMap;
-
 public class PlayersCommandExecutor implements CommandExecutor {
 
-  private HashMap<String, PlayerConnectionInfo> connections;
+  private Repository<String, PlayerConnectionInfo> repository;
   private final PlayerListBuilder playerListBuilder;
 
   public PlayersCommandExecutor(
-          HashMap<String, PlayerConnectionInfo> connections,
+          Repository<String, PlayerConnectionInfo> repository,
           PlayerListSettings listSettings) {
-    this.connections = connections;
+    this.repository = repository;
     this.playerListBuilder = new FormattedPlayerListBuilder(listSettings);
   }
 
@@ -45,6 +44,6 @@ public class PlayersCommandExecutor implements CommandExecutor {
   }
 
   private String getPlayerList() {
-    return playerListBuilder.buildPlayerList(connections);
+    return playerListBuilder.buildPlayerList(repository.getAll());
   }
 }
