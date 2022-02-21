@@ -4,11 +4,12 @@ import io.github.radcraftplay.playeractivity.PlayerConnectionInfo;
 import org.bukkit.ChatColor;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class PrettyPlayerListGenerator implements PlayerListGenerator {
   @Override
-  public String getListHeader(HashMap<String, PlayerConnectionInfo> data) {
+  public String getListHeader(Collection<PlayerConnectionInfo> data) {
     return "Recent player activity:";
   }
 
