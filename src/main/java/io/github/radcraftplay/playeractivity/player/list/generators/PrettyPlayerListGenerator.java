@@ -32,10 +32,18 @@ public class PrettyPlayerListGenerator implements PlayerListGenerator {
 
   private String getRepresentativeTimestamp(Duration timePassedSinceLastConnection) {
     long seconds = timePassedSinceLastConnection.getSeconds();
+    long days = seconds / 86400;
 
-    if (seconds < 172800 && seconds >= 3600) {
+    if (days < 366 && days >= 32) {
+      long months = days / 30;
+      return months + " month(s) ago";
+
+    } else if (days < 32 && seconds >= 172800) {
+      return days + " day(s) ago";
+
+    } else if (seconds < 172800 && seconds >= 3600) {
       long hours = seconds / 3600;
-      return hours + " hours ago";
+      return hours + " hour(s) ago";
 
     } else if (seconds < 3600 && seconds >= 60) {
       long minutes = seconds / 60;
@@ -45,8 +53,8 @@ public class PrettyPlayerListGenerator implements PlayerListGenerator {
       return seconds + " second(s) ago";
 
     } else {
-      long days = seconds / 86400;
-      return days + " day(s) ago";
+      long years = days / 365;
+      return years + " year(s) ago";
     }
   }
 
