@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.radcraftplay</groupId>
     <artifactId>PlayerActivity</artifactId>
-    <version>1.0-RC1</version>
+    <version>1.0-RC3</version>
     <build>
         <plugins>
             <plugin>
