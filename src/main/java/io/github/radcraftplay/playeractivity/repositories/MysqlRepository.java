@@ -29,7 +29,6 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
         try {
             Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(MysqlQueries.getAllPlayersQuery());
-            statement.close();
 
             while (set.next()) {
                 String name = set.getString(1);
@@ -41,6 +40,8 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime()));
             }
+
+            statement.close();
         } catch (SQLException ignored) {
 
         }
@@ -53,7 +54,6 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
         try {
             Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(MysqlQueries.getPlayerByNameQuery(id));
-            statement.close();
 
             if (!set.next())
                 return null;
@@ -61,6 +61,7 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
             String name = set.getString(1);
             boolean connected = set.getBoolean(2);
             Timestamp timestamp = set.getTimestamp(3);
+            statement.close();
 
             return new PlayerConnectionInfo(name, connected, timestamp
                     .toInstant()
