@@ -10,15 +10,15 @@ import java.util.Collection;
 
 public class MysqlRepository implements Repository<String, PlayerConnectionInfo> {
 
-    private final Statement statement;
+    private final Connection connection;
 
     public MysqlRepository(MysqlSettings settings) throws SQLException {
         String connectionUrl =
                 "jdbc:mysql://" + settings.getServerAddress() + "/" + settings.getDatabaseName();
 
-        Connection connection = DriverManager.getConnection(connectionUrl, settings.getUsername(), settings.getPassword());
-        this.statement = connection.createStatement();
-        statement.setQueryTimeout(30);
+        connection = DriverManager.getConnection(connectionUrl, settings.getUsername(), settings.getPassword());
+
+        Statement statement = connection.createStatement();
         statement.executeUpdate(MysqlQueries.getCreateTableQuery());
     }
 
@@ -27,7 +27,9 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
         ArrayList<PlayerConnectionInfo> infos = new ArrayList<>();
 
         try {
+            Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(MysqlQueries.getAllPlayersQuery());
+            statement.close();
 
             while (set.next()) {
                 String name = set.getString(1);
@@ -49,7 +51,10 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
     @Override
     public PlayerConnectionInfo get(String id) {
         try {
+            Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(MysqlQueries.getPlayerByNameQuery(id));
+            statement.close();
+
             if (!set.next())
                 return null;
 
@@ -70,7 +75,11 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
     @Override
     public String add(PlayerConnectionInfo info) {
         try {
-            if (statement.execute(MysqlQueries.getAddPlayerConnectionInfoUpdate(info)))
+            Statement statement = connection.createStatement();
+            boolean executionResult = statement.execute(MysqlQueries.getAddPlayerConnectionInfoUpdate(info));
+            statement.close();
+
+            if (executionResult)
                 return info.getName();
             else
                 return null;
@@ -82,7 +91,11 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
     @Override
     public PlayerConnectionInfo update(String id, PlayerConnectionInfo info) {
         try {
-            if (statement.execute(MysqlQueries.getUpdatePlayerConnectionInfoUpdate(id, info)))
+            Statement statement = connection.createStatement();
+            boolean executionResult = statement.execute(MysqlQueries.getUpdatePlayerConnectionInfoUpdate(id, info));
+            statement.close();
+
+            if (executionResult)
                 return info;
             else
                 return null;
@@ -94,7 +107,11 @@ public class MysqlRepository implements Repository<String, PlayerConnectionInfo>
     @Override
     public boolean delete(String id) {
         try {
-            return statement.execute(MysqlQueries.getRemovePlayerConnectionInfoUpdate(id));
+            Statement statement = connection.createStatement();
+            boolean executionResult = statement.execute(MysqlQueries.getRemovePlayerConnectionInfoUpdate(id));
+            statement.close();
+
+            return executionResult;
         } catch (SQLException ignored) {
             return false;
         }
