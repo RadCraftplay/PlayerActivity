@@ -24,7 +24,8 @@ Displays the list of recently active players with `/players` command.
 ```yaml
 # Player list settings
 list:
-  # Display also online players when executing /players command (by default, true -> shows both online and offline players)
+  # Display also online players when executing /players command
+  # (by default, true -> shows both online and offline players)
   displayOnlinePlayers: true
   # If true, shows only amount of players specified in maxPlayers variable bellow
   limitListLength: true
